@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FergusonSourcingEngineCore\FergusonSourcingCore.csproj" />
-    <ProjectReference Include="..\FergusonSourcingEngineDashboard\FergusonSourcingDashboard.csproj" />
+    <ProjectReference Include="..\FergusonSourcingEngine\FergusonSourcingDashboard.csproj" />
   </ItemGroup>
 
 </Project>
