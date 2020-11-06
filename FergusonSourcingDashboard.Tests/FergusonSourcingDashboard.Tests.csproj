@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
@@ -20,8 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FergusonSourcingDashboard\FergusonSourcingDashboard.csproj" />
     <ProjectReference Include="..\FergusonSourcingEngineCore\FergusonSourcingCore.csproj" />
-    <ProjectReference Include="..\FergusonSourcingEngineDashboard\FergusonSourcingDashboard.csproj" />
+    <ProjectReference Include="..\FergusonSourcingEngine\FergusonSourcingDashboard.csproj" />
   </ItemGroup>
 
 </Project>
