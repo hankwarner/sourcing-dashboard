@@ -1,0 +1,18 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions-3.0.3",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "route": "order/{id}/note",
+      "methods": [
+        "put"
+      ],
+      "authLevel": "function",
+      "name": "req"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/FergusonSourcingDashboard.dll",
+  "entryPoint": "FergusonSourcingDashboard.SourcingDashboardFunctions.UpdateManualOrderNote"
+}

@@ -1,0 +1,16 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions-3.0.3",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "timerTrigger",
+      "schedule": "0 0 23 * * 1-5",
+      "useMonitor": true,
+      "runOnStartup": false,
+      "name": "timer"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/FergusonSourcingDashboard.dll",
+  "entryPoint": "FergusonSourcingDashboard.SourcingDashboardFunctions.ResetClaimedIncompleteOrders"
+}
