@@ -18,11 +18,11 @@ using Newtonsoft.Json;
 
 namespace FergusonSourcingDashboard
 {
-    public class SourcingDashboard
+    public class SourcingDashboardFunctions
     {
         public static IConfiguration _config { get; set; }
 
-        public SourcingDashboard(IConfiguration config)
+        public SourcingDashboardFunctions(IConfiguration config)
         {
             _config = config;
         }
