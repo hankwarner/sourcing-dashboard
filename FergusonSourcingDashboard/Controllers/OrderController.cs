@@ -95,6 +95,7 @@ namespace FergusonSourcingDashboard.Controllers
                                 item.unitPrice = atgLine.unitPrice;
                                 item.extendedPrice = atgLine.extendedPrice;
                                 item.preferredShipVia = atgLine.preferredShipVia;
+                                item.alt1Code = atgLine.alt1Code;
                             });
                         });
 
