@@ -1,8 +1,6 @@
-﻿using AzureFunctions.Extensions.Swashbuckle.Attribute;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FergusonSourcingCore.Models
 {
@@ -93,6 +91,7 @@ namespace FergusonSourcingCore.Models
         public string shipFromLogon { get; set; }
         public string sourcingGuide { get; set; }
         public string itemDescription { get; set; }
+        public string alt1Code { get; set; }
         [JsonIgnore]
         public string preferredShippingMethod { get; set; }
         public string preferredShipVia { get; set; } // Trilogie Ship Via code
