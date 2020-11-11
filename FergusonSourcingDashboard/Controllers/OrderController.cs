@@ -63,11 +63,9 @@ namespace FergusonSourcingDashboard.Controllers
                 // if unit price is missing on the first item, it is missing from all items
                 var unitPrice = manualOrder.sourcing[0].items[0].unitPrice;
                 var prefShipVia = manualOrder.sourcing[0].items[0].preferredShipVia;
-                // Temporaryily removing this to see if phone will set on its own
-                //var phone = manualOrder.paymentOnAccount.payment.phone;
-                //var needsUpdate = string.IsNullOrEmpty(unitPrice) || string.IsNullOrEmpty(phone);
+                var alt1Code = manualOrder.sourcing[0].items[0].alt1Code;
 
-                var needsUpdate = string.IsNullOrEmpty(unitPrice) || string.IsNullOrEmpty(prefShipVia);
+                var needsUpdate = string.IsNullOrEmpty(unitPrice) || string.IsNullOrEmpty(prefShipVia) || string.IsNullOrEmpty(alt1Code);
 
                 if (needsUpdate)
                 {
@@ -86,11 +84,7 @@ namespace FergusonSourcingDashboard.Controllers
 
                     if(order != null)
                     {
-                        // Set phone number
-                        // Temporaryily removing this to see if it will set on its own
-                        //manualOrder.paymentOnAccount.payment.phone = order.paymentOnAccount?.First().phone;
-
-                        // Set unit prices and extended prices
+                        // Set item details on the manual order
                         manualOrder.sourcing.ForEach(source =>
                         {
                             source.items.ForEach(item =>
