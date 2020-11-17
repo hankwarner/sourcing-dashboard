@@ -147,6 +147,7 @@ namespace FergusonSourcingDashboard
             ManualOrder updatedOrder = (dynamic)updatedOrderData;
 
             updatedOrder.claimed = true;
+            updatedOrder.timeClaimed = OrderController.GetCurrentEasternTime();
 
             await cosmosClient.ReplaceDocumentAsync(updatedOrderData.SelfLink, updatedOrder);
 
@@ -191,6 +192,9 @@ namespace FergusonSourcingDashboard
             ManualOrder updatedOrder = (dynamic)updatedOrderData;
 
             updatedOrder.claimed = false;
+            updatedOrder.timeClaimed = null;
+            updatedOrder.orderComplete = false;
+            updatedOrder.timeCompleted = null;
 
             await cosmosClient.ReplaceDocumentAsync(updatedOrderData.SelfLink, updatedOrder);
 
@@ -215,6 +219,7 @@ namespace FergusonSourcingDashboard
             ManualOrder updatedOrder = (dynamic)updatedOrderData;
 
             updatedOrder.orderComplete = true;
+            updatedOrder.timeCompleted = OrderController.GetCurrentEasternTime();
 
             await cosmosClient.ReplaceDocumentAsync(updatedOrderData.SelfLink, updatedOrder);
 
