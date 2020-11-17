@@ -38,11 +38,24 @@ namespace FergusonSourcingDashboard.Controllers
             {
                 ManualOrder manualOrder = (dynamic)orderDoc;
                 manualOrder.claimed = false;
+                manualOrder.timeClaimed = null;
 
                 await document.ReplaceDocumentAsync(orderDoc.SelfLink, manualOrder);
             });
         }
 
+
+        /// <summary>
+        ///     Gets the current UTC time and converts to Eastern Standard Time.
+        /// </summary>
+        /// <returns>Currently EST time in "MM//DD//yyyy h:mm tt" format</returns>
+        public static string GetCurrentEasternTime()
+        {
+            var easternStandardTime = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            var currentEasternTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, easternStandardTime);
+
+            return currentEasternTime.ToString("MM/dd/yyyy h:mm tt");
+        }
 
 
         /// <summary>
