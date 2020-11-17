@@ -21,7 +21,9 @@ namespace FergusonSourcingCore.Models
         public string sourcingMessage { get; set; }
         public string processOrderType { get; set; }
         public bool claimed { get; set; }
+        public string timeClaimed { get; set; } = null;
         public bool orderComplete { get; set; }
+        public string timeCompleted { get; set; } = null;
         public ManualPaymentOnAccount paymentOnAccount { get; set; }
         public ManualShipping shipping { get; set; }
         public List<Sourcing> sourcing { get; set; }
