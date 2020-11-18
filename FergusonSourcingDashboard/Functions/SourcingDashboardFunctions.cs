@@ -19,12 +19,12 @@ using System.Net;
 
 namespace FergusonSourcingDashboard
 {
-    public class SourcingDashboard
+    public class SourcingDashboardFunctions
     {
         public static IConfiguration _config { get; set; }
         public static string errorLogsUrl = Environment.GetEnvironmentVariable("ERROR_LOGS_URL");
 
-        public SourcingDashboard(IConfiguration config)
+        public SourcingDashboardFunctions(IConfiguration config)
         {
             _config = config;
         }
