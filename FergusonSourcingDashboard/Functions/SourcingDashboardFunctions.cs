@@ -376,6 +376,58 @@ namespace FergusonSourcingDashboard
         }
 
 
+        /// <summary>
+        ///     Sets the orderComplete value to false on the manual order.
+        /// </summary>
+        /// <param name="id">ATG Order ID</param>
+        /// <returns>The updated manual order.</returns>
+        [FunctionName("UncompletedOrder")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ManualOrder))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(StatusCodeResult))]
+        public static async Task<IActionResult> UncompletedOrder(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "order/uncomplete/{id}")] HttpRequest req,
+            [CosmosDB(ConnectionStringSetting = "AzureCosmosDBConnectionString"), SwaggerIgnore] DocumentClient cosmosClient,
+            ILogger log,
+            string id)
+        {
+            try
+            {
+                var updatedOrderData = OrderController.GetManualOrderById(cosmosClient, id);
+
+                if (updatedOrderData == null)
+                {
+                    log.LogError("Order ID not found");
+                    return new NotFoundObjectResult("Order ID not found")
+                    {
+                        Value = $"Order ID {id} not found",
+                        StatusCode = 400
+                    };
+                }
+
+                ManualOrder updatedOrder = (dynamic)updatedOrderData;
+
+                updatedOrder.orderComplete = false;
+                updatedOrder.timeCompleted = null;
+
+                await cosmosClient.ReplaceDocumentAsync(updatedOrderData.SelfLink, updatedOrder);
+
+                return new OkObjectResult(updatedOrder);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex.Message);
+                log.LogError(ex.StackTrace);
+
+                var title = "Exception in UncompletedOrder";
+                var text = $"Error message: {ex.Message}. Stacktrace: {ex.StackTrace}";
+                var teamsMessage = new TeamsMessage(title, text, "yellow", errorLogsUrl);
+                teamsMessage.LogToTeams(teamsMessage);
+                return new StatusCodeResult(500);
+            }
+        }
+
+
 
         /// <summary>
         ///     Unclaims manual orders that are claimed not marked completed in the web app. Runs nightly Mon-Fri.
