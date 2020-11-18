@@ -381,11 +381,11 @@ namespace FergusonSourcingDashboard
         /// </summary>
         /// <param name="id">ATG Order ID</param>
         /// <returns>The updated manual order.</returns>
-        [FunctionName("UncompletedOrder")]
+        [FunctionName("UncompleteOrder")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ManualOrder))]
         [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(StatusCodeResult))]
-        public static async Task<IActionResult> UncompletedOrder(
+        public static async Task<IActionResult> UncompleteOrder(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "order/uncomplete/{id}")] HttpRequest req,
             [CosmosDB(ConnectionStringSetting = "AzureCosmosDBConnectionString"), SwaggerIgnore] DocumentClient cosmosClient,
             ILogger log,
@@ -419,7 +419,7 @@ namespace FergusonSourcingDashboard
                 log.LogError(ex.Message);
                 log.LogError(ex.StackTrace);
 
-                var title = "Exception in UncompletedOrder";
+                var title = "Exception in UncompleteOrder";
                 var text = $"Error message: {ex.Message}. Stacktrace: {ex.StackTrace}";
                 var teamsMessage = new TeamsMessage(title, text, "yellow", errorLogsUrl);
                 teamsMessage.LogToTeams(teamsMessage);
