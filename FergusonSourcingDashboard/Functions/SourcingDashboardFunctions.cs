@@ -193,8 +193,6 @@ namespace FergusonSourcingDashboard
 
             updatedOrder.claimed = false;
             updatedOrder.timeClaimed = null;
-            updatedOrder.orderComplete = false;
-            updatedOrder.timeCompleted = null;
 
             await cosmosClient.ReplaceDocumentAsync(updatedOrderData.SelfLink, updatedOrder);
 
