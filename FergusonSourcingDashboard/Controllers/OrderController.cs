@@ -77,8 +77,12 @@ namespace FergusonSourcingDashboard.Controllers
                 var unitPrice = manualOrder.sourcing[0].items[0].unitPrice;
                 var prefShipVia = manualOrder.sourcing[0].items[0].preferredShipVia;
                 var alt1Code = manualOrder.sourcing[0].items[0].alt1Code;
+                var trilErrMsg = manualOrder.trilogieErrorMessage;
+                var trilId = manualOrder.trilogieOrderId;
+                var trilStatus = manualOrder.trilogieStatus;
 
-                var needsUpdate = string.IsNullOrEmpty(unitPrice) || string.IsNullOrEmpty(prefShipVia) || string.IsNullOrEmpty(alt1Code);
+                var needsUpdate = string.IsNullOrEmpty(unitPrice) || string.IsNullOrEmpty(prefShipVia) || string.IsNullOrEmpty(alt1Code)
+                    || string.IsNullOrEmpty(trilErrMsg) || string.IsNullOrEmpty(trilId) || string.IsNullOrEmpty(trilStatus);
 
                 if (needsUpdate)
                 {
@@ -97,6 +101,10 @@ namespace FergusonSourcingDashboard.Controllers
 
                     if(order != null)
                     {
+                        manualOrder.trilogieErrorMessage = order.trilogieErrorMessage;
+                        manualOrder.trilogieOrderId = order.trilogieOrderId;
+                        manualOrder.trilogieStatus = order.trilogieStatus;
+
                         // Set item details on the manual order
                         manualOrder.sourcing.ForEach(source =>
                         {
